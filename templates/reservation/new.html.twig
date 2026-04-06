@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reserve {{ book.title }} - LibraryHub{% endblock %}
+
+{% block body %}
+<div class="breadcrumb">
+    <a href="{{ path('app_book_index') }}">Catalog</a> &raquo;
+    <a href="{{ path('app_book_show', {id: book.id}) }}">{{ book.title }}</a> &raquo;
+    Reserve
+</div>
+
+<div class="form-container">
+    <h1>Reserve: {{ book.title }}</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Available copies:</strong> {{ book.stockQuantity }}</p>
+        </div>
+    </div>
+
+    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+        <div class="form-group">
+            {{ form_label(form.startDate) }}
+            {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.startDate) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.endDate) }}
+            {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.endDate) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+        <a href="{{ path('app_book_show', {id: book.id}) }}" class="btn btn-secondary">Cancel</a>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

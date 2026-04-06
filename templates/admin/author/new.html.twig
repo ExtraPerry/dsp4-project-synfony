@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add Author - Admin{% endblock %}
+{% block body %}
+<div class="breadcrumb"><a href="{{ path('app_admin_dashboard') }}">Admin</a> &raquo; <a href="{{ path('app_admin_authors') }}">Authors</a> &raquo; New</div>
+<div class="form-container">
+    <h1>Add New Author</h1>
+    {{ include('admin/author/_form.html.twig') }}
+</div>
+{% endblock %}

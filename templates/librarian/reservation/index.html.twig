@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation History - LibraryHub{% endblock %}
+
+{% block body %}
+<div class="breadcrumb">
+    <a href="{{ path('app_librarian_dashboard') }}">Librarian</a> &raquo; Reservations
+</div>
+
+<h1>Reservation History</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Book</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.borrower.fullName }}</td>
+                <td>{{ reservation.book.title }}</td>
+                <td>{{ reservation.startDate|date('M j, Y') }}</td>
+                <td>{{ reservation.endDate|date('M j, Y') }}</td>
+                <td>
+                    <span class="status-badge status-{{ reservation.status.value }}">
+                        {{ reservation.status.value|capitalize }}
+                    </span>
+                </td>
+                <td>{{ reservation.createdAt|date('M j, Y H:i') }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6">No reservations found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

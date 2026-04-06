@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title %}Manage Reservations - Admin{% endblock %}
+{% block body %}
+<div class="breadcrumb"><a href="{{ path('app_admin_dashboard') }}">Admin</a> &raquo; Reservations</div>
+<h1>Manage Reservations</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Book</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.borrower.fullName }}</td>
+                <td>{{ reservation.book.title }}</td>
+                <td>{{ reservation.startDate|date('M j, Y') }}</td>
+                <td>{{ reservation.endDate|date('M j, Y') }}</td>
+                <td>
+                    <span class="status-badge status-{{ reservation.status.value }}">
+                        {{ reservation.status.value|capitalize }}
+                    </span>
+                </td>
+                <td class="actions">
+                    {% if reservation.status.value == 'pending' %}
+                        <form method="post" action="{{ path('app_admin_reservation_confirm', {id: reservation.id}) }}" class="inline-form">
+                            <input type="hidden" name="_token" value="{{ csrf_token('confirm' ~ reservation.id) }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Confirm</button>
+                        </form>
+                        <form method="post" action="{{ path('app_admin_reservation_cancel', {id: reservation.id}) }}" class="inline-form">
+                            <input type="hidden" name="_token" value="{{ csrf_token('cancel' ~ reservation.id) }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                        </form>
+                    {% elseif reservation.status.value == 'confirmed' %}
+                        <form method="post" action="{{ path('app_admin_reservation_return', {id: reservation.id}) }}" class="inline-form">
+                            <input type="hidden" name="_token" value="{{ csrf_token('return' ~ reservation.id) }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Mark Returned</button>
+                        </form>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6">No reservations found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

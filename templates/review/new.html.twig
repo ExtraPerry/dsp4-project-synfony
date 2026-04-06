@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Review {{ book.title }} - LibraryHub{% endblock %}
+
+{% block body %}
+<div class="breadcrumb">
+    <a href="{{ path('app_book_index') }}">Catalog</a> &raquo;
+    <a href="{{ path('app_book_show', {id: book.id}) }}">{{ book.title }}</a> &raquo;
+    Write Review
+</div>
+
+<div class="form-container">
+    <h1>Review: {{ book.title }}</h1>
+
+    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+        <div class="form-group">
+            {{ form_label(form.rating) }}
+            <div class="rating-input">
+                {{ form_widget(form.rating) }}
+            </div>
+            {{ form_errors(form.rating) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.comment) }}
+            {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.comment) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+        <a href="{{ path('app_book_show', {id: book.id}) }}" class="btn btn-secondary">Cancel</a>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{{ form_start(form, {'attr': {'class': 'form'}}) }}
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.title) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.isbn) }}
+            {{ form_widget(form.isbn, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.isbn) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.publicationDate) }}
+            {{ form_widget(form.publicationDate, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.publicationDate) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.pageCount) }}
+            {{ form_widget(form.pageCount, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.pageCount) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.stockQuantity) }}
+            {{ form_widget(form.stockQuantity, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.stockQuantity) }}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.coverImage) }}
+            {{ form_widget(form.coverImage, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.coverImage) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.language) }}
+            {{ form_widget(form.language, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.language) }}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.authors) }}
+            <div class="checkbox-group">{{ form_widget(form.authors) }}</div>
+            {{ form_errors(form.authors) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.categories) }}
+            <div class="checkbox-group">{{ form_widget(form.categories) }}</div>
+            {{ form_errors(form.categories) }}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{{ path('app_admin_books') }}" class="btn btn-secondary">Cancel</a>
+{{ form_end(form) }}

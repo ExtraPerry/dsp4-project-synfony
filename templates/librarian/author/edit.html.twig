@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Author - LibraryHub{% endblock %}
+
+{% block body %}
+<div class="breadcrumb">
+    <a href="{{ path('app_librarian_dashboard') }}">Librarian</a> &raquo;
+    <a href="{{ path('app_librarian_authors') }}">Authors</a> &raquo; Edit
+</div>
+
+<div class="form-container">
+    <h1>Edit: {{ author.fullName }}</h1>
+    {{ include('librarian/author/_form.html.twig') }}
+</div>
+{% endblock %}

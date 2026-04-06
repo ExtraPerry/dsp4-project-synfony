@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Librarian Dashboard - LibraryHub{% endblock %}
+
+{% block body %}
+<h1>Librarian Dashboard</h1>
+
+<div class="dashboard-grid">
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ totalBooks }}</h3>
+            <p>Total Books</p>
+            <a href="{{ path('app_librarian_books') }}" class="btn btn-secondary btn-sm">Manage Books</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ pendingReservations|length }}</h3>
+            <p>Pending Reservations</p>
+            <a href="{{ path('app_librarian_reservations') }}" class="btn btn-secondary btn-sm">View All</a>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-nav">
+    <h2>Quick Links</h2>
+    <div class="link-grid">
+        <a href="{{ path('app_librarian_books') }}" class="btn btn-primary">Manage Books</a>
+        <a href="{{ path('app_librarian_authors') }}" class="btn btn-primary">Manage Authors</a>
+        <a href="{{ path('app_librarian_categories') }}" class="btn btn-primary">Manage Categories</a>
+        <a href="{{ path('app_librarian_languages') }}" class="btn btn-primary">Manage Languages</a>
+        <a href="{{ path('app_librarian_reservations') }}" class="btn btn-primary">Reservation History</a>
+    </div>
+</div>
+{% endblock %}

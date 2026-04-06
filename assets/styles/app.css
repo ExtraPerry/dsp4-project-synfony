@@ -1,3 +1,696 @@
+/* ===== RESET & BASE ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-color: skyblue;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #000;
+    background-color: #fff;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #000;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #333;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    border-bottom: 2px solid #000;
+    padding: 15px 0;
+    background: #fff;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar-links a:hover {
+    border-bottom-color: #000;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    flex: 1;
+    padding: 30px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    border-top: 2px solid #000;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* ===== FLASH MESSAGES ===== */
+.flash {
+    padding: 12px 16px;
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.flash-success {
+    background: #eee;
+}
+
+.flash-error {
+    background: #fff;
+    border-width: 2px;
+}
+
+/* ===== HERO ===== */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    border: 2px solid #000;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    margin-top: 40px;
+}
+
+.section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+.btn-primary {
+    background: #000;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #333;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #fff;
+    color: #000;
+}
+
+.btn-danger {
+    border-color: #000;
+}
+
+.btn-danger:hover {
+    background: #333;
+    color: #fff;
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* ===== CARDS ===== */
+.card {
+    border: 1px solid #000;
+    background: #fff;
+}
+
+.card-image {
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    background: #f5f5f5;
+}
+
+.card-image img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.card-title a {
+    text-decoration: none;
+}
+
+.card-title a:hover {
+    text-decoration: underline;
+}
+
+.card-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+/* ===== BOOK GRID ===== */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* ===== PLACEHOLDER COVER ===== */
+.placeholder-cover {
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 160px;
+    background: #eee;
+}
+
+.placeholder-cover.large {
+    height: 300px;
+    font-size: 5rem;
+}
+
+/* ===== STARS ===== */
+.stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin: 5px 0;
+}
+
+.star {
+    color: #ccc;
+    font-size: 1.1rem;
+}
+
+.star.filled {
+    color: #000;
+}
+
+.large-stars .star {
+    font-size: 1.4rem;
+}
+
+.rating-value {
+    margin-left: 6px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ===== STOCK INFO ===== */
+.in-stock {
+    color: #000;
+    font-weight: 600;
+}
+
+.out-of-stock {
+    color: #999;
+    font-style: italic;
+}
+
+.stock-info {
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* ===== TAGS ===== */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid #000;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* ===== FORMS ===== */
+.form {
+    max-width: 600px;
+}
+
+.form-container {
+    max-width: 600px;
+}
+
+.form-container .form {
+    max-width: 100%;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #000;
+    background: #fff;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: 2px solid #000;
+    outline-offset: 1px;
+}
+
+.form-control-sm {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+    width: auto;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+select.form-control {
+    cursor: pointer;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.search-form {
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.search-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.search-btn-group {
+    display: flex;
+    gap: 8px;
+    align-items: end;
+    padding-bottom: 0;
+}
+
+.checkbox-group {
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+/* ===== FORM ERRORS ===== */
+.form-group ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 4px;
+}
+
+.form-group li {
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ===== AUTH PAGES ===== */
+.auth-container {
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* ===== TABLES ===== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.table th,
+.table td {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.table th {
+    background: #000;
+    color: #fff;
+    font-weight: 600;
+}
+
+.table tbody tr:nth-child(even) {
+    background: #f5f5f5;
+}
+
+.table tbody tr:hover {
+    background: #eee;
+}
+
+.table .actions {
+    white-space: nowrap;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+/* ===== INLINE FORM ===== */
+.inline-form {
+    display: inline;
+}
+
+.role-form {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+/* ===== STATUS BADGES ===== */
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid #000;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #eee;
+}
+
+.status-confirmed {
+    background: #000;
+    color: #fff;
+}
+
+.status-returned {
+    background: #ccc;
+}
+
+.status-cancelled {
+    background: #fff;
+    color: #999;
+    border-color: #999;
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.breadcrumb a {
+    color: #000;
+}
+
+/* ===== BOOK DETAIL ===== */
+.book-detail {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.book-detail-image img {
+    width: 100%;
+    border: 1px solid #000;
+}
+
+.book-detail-info h1 {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.book-meta p {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.book-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* ===== REVIEWS ===== */
+.reviews-list {
+    margin-top: 15px;
+}
+
+.review-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.review-date {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.review-comment {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* ===== RATING INPUT ===== */
+.rating-input {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rating-input label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-weight: 400 !important;
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.dashboard-grid .card {
+    text-align: center;
+}
+
+.dashboard-grid .card h3 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.dashboard-nav {
+    margin-top: 30px;
+}
+
+.link-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* ===== RESULTS COUNT ===== */
+.results-count {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.no-results {
+    padding: 40px;
+    text-align: center;
+    color: #666;
+    border: 1px dashed #ccc;
+}
+
+/* ===== PROFILE INFO ===== */
+.profile-info {
+    margin-bottom: 30px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .book-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .search-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .table {
+        font-size: 0.8rem;
+    }
+
+    .table .actions {
+        flex-direction: column;
+    }
 }

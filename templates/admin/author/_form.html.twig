@@ -1,0 +1,21 @@
+{{ form_start(form, {'attr': {'class': 'form'}}) }}
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.firstName) }}
+            {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.firstName) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.lastName) }}
+            {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.lastName) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.biography) }}
+        {{ form_widget(form.biography, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.biography) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{{ path('app_admin_authors') }}" class="btn btn-secondary">Cancel</a>
+{{ form_end(form) }}

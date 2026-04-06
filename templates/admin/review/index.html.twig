@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Moderate Reviews - Admin{% endblock %}
+{% block body %}
+<div class="breadcrumb"><a href="{{ path('app_admin_dashboard') }}">Admin</a> &raquo; Reviews</div>
+<h1>Moderate Reviews</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Book</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.reviewer.fullName }}</td>
+                <td>{{ review.book.title }}</td>
+                <td>
+                    <div class="stars">
+                        {% for i in 1..5 %}
+                            <span class="star {{ i <= review.rating ? 'filled' : '' }}">★</span>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td>{{ review.comment|default('-')|length > 100 ? review.comment|slice(0, 100) ~ '...' : review.comment|default('-') }}</td>
+                <td>{{ review.createdAt|date('M j, Y') }}</td>
+                <td class="actions">
+                    <form method="post" action="{{ path('app_admin_review_delete', {id: review.id}) }}" class="inline-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ review.id) }}">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this review?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6">No reviews found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

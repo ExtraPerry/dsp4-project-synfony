@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Dashboard - LibraryHub{% endblock %}
+
+{% block body %}
+<h1>Admin Dashboard</h1>
+
+<div class="dashboard-grid">
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ totalBooks }}</h3>
+            <p>Total Books</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ totalUsers }}</h3>
+            <p>Total Users</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ pendingReservations|length }}</h3>
+            <p>Pending Reservations</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ totalReviews }}</h3>
+            <p>Total Reviews</p>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-nav">
+    <h2>Administration</h2>
+    <div class="link-grid">
+        <a href="{{ path('app_admin_books') }}" class="btn btn-primary">Manage Books</a>
+        <a href="{{ path('app_admin_authors') }}" class="btn btn-primary">Manage Authors</a>
+        <a href="{{ path('app_admin_categories') }}" class="btn btn-primary">Manage Categories</a>
+        <a href="{{ path('app_admin_languages') }}" class="btn btn-primary">Manage Languages</a>
+        <a href="{{ path('app_admin_reservations') }}" class="btn btn-primary">Manage Reservations</a>
+        <a href="{{ path('app_admin_users') }}" class="btn btn-primary">Manage Users</a>
+        <a href="{{ path('app_admin_reviews') }}" class="btn btn-primary">Moderate Reviews</a>
+    </div>
+</div>
+{% endblock %}

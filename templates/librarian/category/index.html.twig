@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Categories - LibraryHub{% endblock %}
+
+{% block body %}
+<div class="breadcrumb">
+    <a href="{{ path('app_librarian_dashboard') }}">Librarian</a> &raquo; Categories
+</div>
+
+<div class="page-header">
+    <h1>Manage Categories</h1>
+    <a href="{{ path('app_librarian_category_new') }}" class="btn btn-primary">Add New Category</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Books</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>{{ category.books|length }}</td>
+                <td class="actions">
+                    <a href="{{ path('app_librarian_category_edit', {id: category.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
+                    <form method="post" action="{{ path('app_librarian_category_delete', {id: category.id}) }}" class="inline-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="3">No categories found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

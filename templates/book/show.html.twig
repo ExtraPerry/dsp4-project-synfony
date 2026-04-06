@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }} - LibraryHub{% endblock %}
+
+{% block body %}
+<div class="breadcrumb">
+    <a href="{{ path('app_book_index') }}">Catalog</a> &raquo; {{ book.title }}
+</div>
+
+<div class="book-detail">
+    <div class="book-detail-image">
+        {% if book.coverImage %}
+            <img src="{{ book.coverImage }}" alt="{{ book.title }}">
+        {% else %}
+            <div class="placeholder-cover large">📖</div>
+        {% endif %}
+    </div>
+
+    <div class="book-detail-info">
+        <h1>{{ book.title }}</h1>
+
+        <div class="book-meta">
+            {% if book.authors|length > 0 %}
+                <p><strong>Author(s):</strong>
+                    {% for author in book.authors %}
+                        {{ author.fullName }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            {% endif %}
+
+            {% if book.categories|length > 0 %}
+                <p><strong>Categories:</strong>
+                    {% for category in book.categories %}
+                        <span class="tag">{{ category.name }}</span>
+                    {% endfor %}
+                </p>
+            {% endif %}
+
+            {% if book.language %}
+                <p><strong>Language:</strong> {{ book.language.name }}</p>
+            {% endif %}
+
+            {% if book.isbn %}
+                <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+            {% endif %}
+
+            {% if book.publicationDate %}
+                <p><strong>Published:</strong> {{ book.publicationDate|date('F j, Y') }}</p>
+            {% endif %}
+
+            {% if book.pageCount %}
+                <p><strong>Pages:</strong> {{ book.pageCount }}</p>
+            {% endif %}
+
+            <p><strong>Availability:</strong>
+                {% if book.stockQuantity > 0 %}
+                    <span class="in-stock">{{ book.stockQuantity }} copies available</span>
+                {% else %}
+                    <span class="out-of-stock">Out of stock</span>
+                {% endif %}
+            </p>
+        </div>
+
+        {% if book.averageRating %}
+            <div class="stars large-stars">
+                {% for i in 1..5 %}
+                    <span class="star {{ i <= book.averageRating ? 'filled' : '' }}">★</span>
+                {% endfor %}
+                <span class="rating-value">{{ book.averageRating }}/5 ({{ book.reviews|length }} review(s))</span>
+            </div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="book-actions">
+                {% if book.stockQuantity > 0 %}
+                    <a href="{{ path('app_reservation_new', {bookId: book.id}) }}" class="btn btn-primary">Reserve this book</a>
+                {% endif %}
+
+                <form method="post" action="{{ path('app_favorite_toggle', {bookId: book.id}) }}" class="inline-form">
+                    <input type="hidden" name="_token" value="{{ csrf_token('favorite' ~ book.id) }}">
+                    {% if app.user.hasFavoriteBook(book) %}
+                        <button type="submit" class="btn btn-secondary">Remove from Favorites</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-secondary">Add to Favorites</button>
+                    {% endif %}
+                </form>
+            </div>
+        {% else %}
+            <p><a href="{{ path('app_login') }}">Log in</a> to reserve or favorite this book.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% if book.description %}
+    <section class="section">
+        <h2>Description</h2>
+        <p>{{ book.description }}</p>
+    </section>
+{% endif %}
+
+<section class="section">
+    <h2>Reviews</h2>
+
+    {% if app.user and not userReview %}
+        <a href="{{ path('app_review_new', {bookId: book.id}) }}" class="btn btn-primary">Write a Review</a>
+    {% endif %}
+
+    {% if book.reviews|length > 0 %}
+        <div class="reviews-list">
+            {% for review in book.reviews %}
+                <div class="review-card">
+                    <div class="review-header">
+                        <strong>{{ review.reviewer.fullName }}</strong>
+                        <span class="review-date">{{ review.createdAt|date('M j, Y') }}</span>
+                    </div>
+                    <div class="stars">
+                        {% for i in 1..5 %}
+                            <span class="star {{ i <= review.rating ? 'filled' : '' }}">★</span>
+                        {% endfor %}
+                    </div>
+                    {% if review.comment %}
+                        <p class="review-comment">{{ review.comment }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No reviews yet. Be the first to review this book!</p>
+    {% endif %}
+</section>
+{% endblock %}

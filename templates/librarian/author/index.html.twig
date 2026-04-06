@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Authors - LibraryHub{% endblock %}
+
+{% block body %}
+<div class="breadcrumb">
+    <a href="{{ path('app_librarian_dashboard') }}">Librarian</a> &raquo; Authors
+</div>
+
+<div class="page-header">
+    <h1>Manage Authors</h1>
+    <a href="{{ path('app_librarian_author_new') }}" class="btn btn-primary">Add New Author</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Books</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.fullName }}</td>
+                <td>{{ author.books|length }}</td>
+                <td class="actions">
+                    <a href="{{ path('app_librarian_author_edit', {id: author.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
+                    <form method="post" action="{{ path('app_librarian_author_delete', {id: author.id}) }}" class="inline-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ author.id) }}">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this author?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="3">No authors found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
